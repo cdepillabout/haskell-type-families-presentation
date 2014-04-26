@@ -16,6 +16,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="css/my-stuff.css">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -51,8 +52,21 @@
 				<section>
 					<h2>予備知識</h2>
 					<h4>型クラス（type classes）</h4>
-					<pre><code>
-					</code></pre>
+					<pre class="codepre"><span data-fragment-index="1" class="fragment highlightcode"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a <span class="keyword">where</span></span></span>
+		<span data-fragment-index="1" class="fragment highlightcode">add :: a -&gt; a -&gt; a</span>
+
+<span data-fragment-index="2" class="fragment highlightcode"><span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Integer</span> <span class="keyword">where</span></span></span>
+		<span data-fragment-index="2" class="fragment highlightcode">add x y = x + y</span>
+
+<span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Double</span> <span class="keyword">where</span></span>
+    add x y = x + y
+
+<span class="title">main</span> = <span class="keyword">do</span>
+        print $ add (<span class="number">5</span> :: <span class="type">Integer</span>) <span class="number">6</span>    <span class="comment">-- 11が出力される</span>
+        print $ add (<span class="number">5.0</span> :: <span class="type">Double</span>) <span class="number">6.0</span> <span class="comment">-- 11.0が出力される</span></pre>
+
+					<p data-fragment-index="1" class="fragment">型クラスAdd aの宣言</p>
+					<p data-fragment-index="2" class="fragment">型クラスAdd aの宣言</p>
 
 					<aside class="notes">
 
