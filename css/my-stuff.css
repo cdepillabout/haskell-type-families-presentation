@@ -1,4 +1,13 @@
-	.reveal .slides section .always-highlightcode {
+.reveal pre.codepre {
+    background: none repeat scroll 0 0 #3F3F3F;
+    color: #DCDCDC;
+    overflow: auto;
+    padding: 5px;
+    margin: 40px auto;
+    width: 1000px;
+}
+
+	.reveal .slides section .always-highlight-code {
 		text-shadow: 1px 1px 2px grey;
 		background-color: black;
 		border: 4px solid white;
@@ -6,21 +15,22 @@
 	}
 
 
-.reveal .slides section .fragment.highlightcode {
+.reveal .slides section .fragment.highlight-code {
 	opacity: 1;
 }
-	.reveal .slides section .fragment.highlightcode.visible.current-fragment {
+	.reveal .slides section .fragment.highlight-code.visible.current-fragment {
 		text-shadow: 2px 2px 5px black;
 		/* background-color: black; */
 		/* border: 4px solid white; */
 		font: bold 40px/55px monospace;
 	}
 
-
-.reveal pre.codepre {
-    background: none repeat scroll 0 0 #3F3F3F;
-    color: #DCDCDC;
-    overflow: auto;
-    padding: 5px;
-    margin: 40px auto;
+.reveal .slides section .fragment.explain-highlighted-code {
+    display: none;
 }
+.reveal .slides section .fragment.explain-highlighted-code.visible.current-fragment {
+	opacity: 1;
+    display: inline;
+}
+
+

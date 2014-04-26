@@ -52,21 +52,22 @@
 				<section>
 					<h2>予備知識</h2>
 					<h4>型クラス（type classes）</h4>
-					<pre class="codepre"><span data-fragment-index="1" class="fragment highlightcode"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a <span class="keyword">where</span></span></span>
-		<span data-fragment-index="1" class="fragment highlightcode">add :: a -&gt; a -&gt; a</span>
+					<pre class="codepre"><span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a <span class="keyword">where</span></span></span>
+		<span data-fragment-index="1" class="fragment highlight-code">add :: a -&gt; a -&gt; a</span>
 
-<span data-fragment-index="2" class="fragment highlightcode"><span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Integer</span> <span class="keyword">where</span></span></span>
-		<span data-fragment-index="2" class="fragment highlightcode">add x y = x + y</span>
+<span data-fragment-index="2" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Integer</span> <span class="keyword">where</span></span></span>
+		<span data-fragment-index="2" class="fragment highlight-code">add x y = x + y</span>
 
 <span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Double</span> <span class="keyword">where</span></span>
     add x y = x + y
 
 <span class="title">main</span> = <span class="keyword">do</span>
-        print $ add (<span class="number">5</span> :: <span class="type">Integer</span>) <span class="number">6</span>    <span class="comment">-- 11が出力される</span>
+				<span data-fragment-index="3" class="fragment highlight-code">print $ add (<span class="number">5</span> :: <span class="type">Integer</span>) <span class="number">6</span></span>    <span class="comment">-- 11が出力される</span>
         print $ add (<span class="number">5.0</span> :: <span class="type">Double</span>) <span class="number">6.0</span> <span class="comment">-- 11.0が出力される</span></pre>
 
-					<p data-fragment-index="1" class="fragment">型クラスAdd aの宣言</p>
-					<p data-fragment-index="2" class="fragment">型クラスAdd aの宣言</p>
+					<p data-fragment-index="1" class="fragment explain-highlighted-code">型クラスAdd aの宣言</p>
+					<p data-fragment-index="2" class="fragment explain-highlighted-code">インスタンス宣言</p>
+					<p data-fragment-index="3" class="fragment explain-highlighted-code">使い方</p>
 
 					<aside class="notes">
 
