@@ -78,19 +78,19 @@
 				<section>
 					<h2>問題</h2>
 					<h4>どう書けばいい？</h4>
-					<pre class="codepre"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a b <span class="keyword">where</span></span>
-    plus :: a -&gt; b -&gt; <b>???</b>
+					<pre class="codepre"><span data-fragment-index="2" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> <span data-fragment-index="4" class="fragment highlight-code">a</span> <span data-fragment-index="3" class="fragment highlight-code">b</span> <span class="keyword">where</span></span></span>
+    <span data-fragment-index="2" class="fragment highlight-code">plus :: a -&gt; b -&gt; <b>???</b></span>
 
-<span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Integer</span> <span class="type">Double</span> <span class="keyword">where</span></span></span>
+<span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span data-fragment-index="3" class="fragment highlight-code"><span class="type">Add</span> <span class="type">Integer</span> <span class="type">Double</span></span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus x y = fromIntegral x + y</span>
 
-<span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span> <span class="keyword">where</span></span></span>
+<span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span data-fragment-index="4" class="fragment highlight-code"><span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span></span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus x y = x + fromIntegral y</code></pre></span>
 
-					<p data-fragment-index="1" class="fragment explain-highlighted-code">こういうインスタンスを書きたいとき、<br />型宣言をどういうふうに書けばいい？</p>
-					<p data-fragment-index="2" class="fragment explain-highlighted-code">インスタンス宣言</p>
-					<p data-fragment-index="3" class="fragment explain-highlighted-code">使い方</p>
-					<p data-fragment-index="4" class="fragment explain-highlighted-code">型クラスAddの<b>a</b>が変数みたいなもので、<br />インスタンス宣言で<b>Integer</b>という値が入る</p>
+					<p data-fragment-index="1" class="fragment explain-highlighted-code">先のとちょっと変えた。<br />Addのインスタンスに二つの型を渡している。<br />こういうインスタンスを書きたいとき、<br />型クラスの宣言をどういうふうに書けばいい？</p>
+					<p data-fragment-index="2" class="fragment explain-highlighted-code">plus関数の型が書けない。<br />戻り値の型がaかbか？</p>
+					<p data-fragment-index="3" class="fragment explain-highlighted-code">インスタンスがAdd Integer Doubleのとき、<br />bの型で<br />plus :: a -&gt; b -&gt; b</p>
+					<p data-fragment-index="4" class="fragment explain-highlighted-code">Add Double Integerのとき、<br />aの型です<br />plus :: a -&gt; b -&gt; a</p>
 
 					<aside class="notes">
 
