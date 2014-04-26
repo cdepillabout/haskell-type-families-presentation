@@ -40,10 +40,10 @@
 				<section>
 					<h1>HaskellのType Families</h1>
 					<h3>型の族</h3>
-					<p>
+					<p>View <a href="http://cdepillabout.github.io/haskell-type-families-presentation/index.html">this presentation</a> online</p>
+					<p style="margin-top: 50px">
 						<small>Created by <a href="https://github.com/cdepillabout">Dennis</a> / <a href="http://twitter.com/cdepillabout">@cdepillabout</a></small>
 					</p>
-					<p>Link to <a href="http://cdepillabout.github.io/haskell-type-families-presentation/index.html">this presentation.</a></p>
 
 					<aside class="notes">
 
@@ -86,12 +86,45 @@
     <span data-fragment-index="1" class="fragment highlight-code">plus x y = fromIntegral x + y</span>
 
 <span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span data-fragment-index="4" class="fragment highlight-code"><span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span></span> <span class="keyword">where</span></span></span>
-    <span data-fragment-index="1" class="fragment highlight-code">plus x y = x + fromIntegral y</code></pre></span>
+    <span data-fragment-index="1" class="fragment highlight-code">plus x y = x + fromIntegral y</span></pre>
 
 					<p data-fragment-index="1" class="fragment explain-highlighted-code">先のとちょっと変えた。<br />Addのインスタンスに二つの型を渡している。<br />こういうインスタンスを書きたいとき、<br />型クラスの宣言をどういうふうに書けばいい？</p>
 					<p data-fragment-index="2" class="fragment explain-highlighted-code">plus関数の型が書けない。<br />戻り値の型がaかbか？</p>
 					<p data-fragment-index="3" class="fragment explain-highlighted-code">インスタンスがAdd Integer Doubleのとき、<br />bの型で<br />plus :: a -&gt; b -&gt; b</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code">Add Double Integerのとき、<br />aの型です<br />plus :: a -&gt; b -&gt; a</p>
+
+					<aside class="notes">
+
+					</aside>
+				</section>
+
+				<section>
+					<h2>解決</h2>
+					<h4>型レベル関数？</h4>
+					<pre class="codepre"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a b <span class="keyword">where</span></span>
+    <span data-fragment-index="1" class="fragment highlight-code"><span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> a b</span></span>
+    plus :: a -&gt; b -&gt; <span data-fragment-index="1" class="fragment highlight-code"><span class="type">SumTy</span> a b</span>
+
+<span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Integer</span> <span class="type">Double</span> <span class="keyword">where</span></span>
+    <span data-fragment-index="1" class="fragment highlight-code"><span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> <span class="type">Integer</span> <span class="type">Double</span> = <span class="type">Double</span></span></span>
+    plus x y = fromIntegral x + y
+
+<span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span> <span class="keyword">where</span></span>
+    <span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> <span class="type">Double</span> <span class="type">Integer</span> = <span class="type">Double</span></span>
+    plus x y = x + fromIntegral y
+
+<span class="class"><span class="keyword">instance</span> (<span class="type">Num</span> a) =&gt; <span class="type">Add</span> a a <span class="keyword">where</span></span>
+    <span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> a a = a</span>
+    plus x y = x + y
+
+<span class="title">main</span> = print $ plus (<span class="number">5</span> :: <span class="type">Integer</span>) (<span class="number">6</span> :: <span class="type">Double</span>)</pre>
+
+					<ul data-fragment-index="1" class="fragment explain-highlighted-code">
+						<li>前のスライドと変えたところを大きく表示した</li>
+					</ul>
+					<p data-fragment-index="2" class="fragment explain-highlighted-code"></p>
+					<p data-fragment-index="3" class="fragment explain-highlighted-code"></p>
+					<p data-fragment-index="4" class="fragment explain-highlighted-code"></p>
 
 					<aside class="notes">
 

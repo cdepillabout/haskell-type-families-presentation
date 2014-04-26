@@ -16,6 +16,5 @@ instance (Num a) => Add a a where
     type SumTy a a = a
     plus x y = x + y
 
-main :: IO ()
-main = putStrLn "Hello"
+main = print $ plus (5 :: Integer) (6 :: Double)
 
