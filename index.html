@@ -51,6 +51,19 @@
 				</section>
 
 				<section>
+					<h2>intro</h2>
+					<ul>
+						<li>haskellの初心者</li>
+						<li></li>
+						<li></li>
+					</ul>
+
+					<aside class="notes">
+
+					</aside>
+				</section>
+
+				<section>
 					<h2>予備知識</h2>
 					<h4>型クラス（type classes）</h4>
 					<pre class="codepre"><span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> <span data-fragment-index="4" class="fragment highlight-code">a</span> <span class="keyword">where</span></span></span>
@@ -66,10 +79,21 @@
         <span data-fragment-index="3" class="fragment highlight-code">print $ plus (<span class="number">5</span> :: <span class="type">Integer</span>) <span class="number">6</span></span>    <span class="comment">-- 11が出力される</span>
         print $ plus (<span class="number">5.0</span> :: <span class="type">Double</span>) <span class="number">6.0</span> <span class="comment">-- 11.0が出力される</span></pre>
 
-					<p data-fragment-index="1" class="fragment explain-highlighted-code">型クラスAdd aの宣言</p>
-					<p data-fragment-index="2" class="fragment explain-highlighted-code">インスタンス宣言</p>
-					<p data-fragment-index="3" class="fragment explain-highlighted-code">使い方</p>
-					<p data-fragment-index="4" class="fragment explain-highlighted-code">型クラスAddの<b>a</b>が変数みたいなもので、<br />インスタンス宣言で<b>Integer</b>という値が入る</p>
+					<p data-fragment-index="1" class="fragment explain-highlighted-code">
+						型クラスAdd aの宣言
+					</p>
+					<p data-fragment-index="2" class="fragment explain-highlighted-code">
+						インスタンス宣言
+					</p>
+					<p data-fragment-index="3" class="fragment explain-highlighted-code">
+						使い方
+					</p>
+					<p data-fragment-index="4" class="fragment explain-highlighted-code">
+						型クラスAddの<b>a</b>が変数みたいなもので、<br />
+						インスタンス宣言で<b>Integer</b>という値が入る。<br />
+						Add Integerのインスタンスのプラス関数が下記の型になる<br />
+						plus :: <b>Integer -&gt; Integer -&gt; Integer</b>
+					</p>
 
 					<aside class="notes">
 
@@ -88,7 +112,7 @@
 <span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span data-fragment-index="4" class="fragment highlight-code"><span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span></span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus x y = x + fromIntegral y</span></pre>
 
-					<p data-fragment-index="1" class="fragment explain-highlighted-code">先のとちょっと変えた。<br />Addのインスタンスに二つの型を渡している。<br />こういうインスタンスを書きたいとき、<br />型クラスの宣言をどういうふうに書けばいい？</p>
+					<p data-fragment-index="1" class="fragment explain-highlighted-code">先のとちょっと変えた。<br />Addのインスタンスに二つの型を渡している。<br />こういうインスタンスを書きたいとき、<br />型クラスのplusメンバをどういうふうに書けばいい？</p>
 					<p data-fragment-index="2" class="fragment explain-highlighted-code">plus関数の型が書けない。<br />戻り値の型がaかbか？</p>
 					<p data-fragment-index="3" class="fragment explain-highlighted-code">インスタンスがAdd Integer Doubleのとき、<br />bの型で<br />plus :: a -&gt; b -&gt; b</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code">Add Double Integerのとき、<br />aの型です<br />plus :: a -&gt; b -&gt; a</p>
@@ -101,12 +125,12 @@
 				<section>
 					<h2>解決</h2>
 					<h4>型レベル関数？</h4>
-					<pre class="codepre"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a b <span class="keyword">where</span></span>
-    <span data-fragment-index="1" class="fragment highlight-code"><span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> a b</span></span>
-    plus :: a -&gt; b -&gt; <span data-fragment-index="1" class="fragment highlight-code"><span class="type">SumTy</span> a b</span>
+					<pre class="codepre"><span data-fragment-index="2" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a b <span class="keyword">where</span></span></span>
+    <span data-fragment-index="3" class="fragment highlight-code"><span data-fragment-index="2" class="fragment highlight-code"><span data-fragment-index="1" class="fragment highlight-code"><span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> a b</span></span></span></span><span data-fragment-index="3" class="fragment show-only-blue"> = X</span>
+    <span data-fragment-index="2" class="fragment highlight-code">plus :: a -&gt; b -&gt; <span data-fragment-index="1" class="fragment highlight-code"><span data-fragment-index="3" class="fragment highlight-code"><span data-fragment-index="3" class="fragment hide-code"><span class="type">SumTy</span> a b</span></span></span></span><span data-fragment-index="3" class="fragment show-only-blue">X</span>
 
 <span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Integer</span> <span class="type">Double</span> <span class="keyword">where</span></span>
-    <span data-fragment-index="1" class="fragment highlight-code"><span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> <span class="type">Integer</span> <span class="type">Double</span> = <span class="type">Double</span></span></span>
+    <span data-fragment-index="1" class="fragment highlight-code"><span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> <span class="type">Integer</span> <span class="type">Double</span> = <span data-fragment-index="3" class="fragment highlight-code-blue"><span class="type">Double</span></span></span></span>
     plus x y = fromIntegral x + y
 
 <span class="class"><span class="keyword">instance</span> <span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span> <span class="keyword">where</span></span>
@@ -121,10 +145,69 @@
 
 					<ul data-fragment-index="1" class="fragment explain-highlighted-code">
 						<li>前のスライドと変えたところを大きく表示した</li>
+						<li>二行の追加とplusメンバの型</li>
+						<li>これが型の族 (type families)</li>
 					</ul>
-					<p data-fragment-index="2" class="fragment explain-highlighted-code"></p>
-					<p data-fragment-index="3" class="fragment explain-highlighted-code"></p>
+					<p data-fragment-index="2" class="fragment explain-highlighted-code">
+						まず、型クラスをみてみよう。<br />
+						plusのSumTyの型ってどういう意味、、、？
+					</p>
+					<p data-fragment-index="3" class="fragment explain-highlighted-code">
+						こういう書き方のほうがわかりやすいでしょう。<br />
+						SumTy a b = X。plusの戻り値の型がX。<br />
+						インスタンス宣言ではXの値はDouble。
+					</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code"></p>
+
+					<aside class="notes">
+
+					</aside>
+				</section>
+
+				<section>
+					<h3>型族は実際にどこで使われている？</h3>
+					<h4>Yesod!</h4>
+					<pre><code class="haskell">class YesodAuth master where
+  type AuthId master
+  -- | Determine the ID associated with the set of credentials.
+  getAuthId :: Creds master -> Maybe (AuthId master)
+
+instance YesodAuth BrowserId where
+  type AuthId BrowserId = Text
+  getAuthId = Just . credsIdent
+
+instance YesodAuth Auth2 where
+  type AuthId BrowserId = String
+  getAuthId = Just . credsIdent</code></pre>
+
+					<aside class="notes">
+
+					</aside>
+				</section>
+
+				<section>
+					<h3>必要なLANGUAGE pragmas</h3>
+
+					<p style="color: red;">{-# LANGUAGE FlexibleContents, MultiParamTypeClasses, TypeFamilies #-}</p>
+
+					<ul>
+						<li>FlexibleContents</li>
+						<li>MultiParamTypeClasses</li>
+						<li>TypeFamilies</li>
+					</ul>
+
+					<aside class="notes">
+
+					</aside>
+				</section>
+
+				<section>
+					<h2>References</h2>
+
+					<ul>
+						<li><a href="http://www.haskell.org/haskellwiki/Simonpj/Talk:FunWithTypeFuns">Fun with Type Functions</a></li>
+						<li><a href="http://www.haskell.org/haskellwiki/GHC/Type_families">Haskell Wiki on Type Families</a></li>
+					</ul>
 
 					<aside class="notes">
 
@@ -147,7 +230,8 @@
 				controls: true,
 				progress: true,
 				history: true,
-				center: true,
+				//center: true,
+				center: false,
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none

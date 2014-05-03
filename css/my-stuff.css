@@ -1,10 +1,10 @@
 .reveal pre.codepre {
-    background: none repeat scroll 0 0 #3F3F3F;
-    color: #DCDCDC;
-    overflow: auto;
-    padding: 5px;
-    margin: 40px auto;
-    width: 1000px;
+	background: none repeat scroll 0 0 #3F3F3F;
+	color: #DCDCDC;
+	overflow: auto;
+	padding: 5px;
+	margin: 40px auto;
+	width: 1000px;
 }
 
 	.reveal .slides section .always-highlight-code {
@@ -25,12 +25,44 @@
 		font: bold 40px/55px monospace;
 	}
 
+.reveal .slides section .fragment.highlight-code-blue {
+	opacity: 1;
+}
+	.reveal .slides section .fragment.highlight-code-blue.visible.current-fragment {
+		text-shadow: 2px 2px 5px black;
+		/* background-color: black; */
+		/* border: 4px solid white; */
+		font: bold 40px/55px monospace;
+		color: lightblue;
+	}
+
+.reveal .slides section .fragment.show-only-blue {
+	opacity: 0;
+	display: none;
+}
+	.reveal .slides section .fragment.show-only-blue.visible.current-fragment {
+		opacity: 1;
+		text-shadow: 2px 2px 5px black;
+		/* background-color: black; */
+		/* border: 4px solid white; */
+		font: bold 40px/55px monospace;
+		color: lightblue;
+		display: inline;
+	}
+
+.reveal .slides section .fragment.hide-code {
+	opacity: 1;
+}
+	.reveal .slides section .fragment.hide-code.visible.current-fragment {
+		display: none;
+	}
+
 .reveal .slides section .fragment.explain-highlighted-code {
-    display: none;
+	display: none;
 }
 .reveal .slides section .fragment.explain-highlighted-code.visible.current-fragment {
 	opacity: 1;
-    display: inline;
+	display: inline;
 }
 
 
