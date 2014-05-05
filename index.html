@@ -190,13 +190,37 @@ instance YesodAuth Auth2 where
 				<section>
 					<h3>必要なLANGUAGE pragmas</h3>
 
-					<p style="color: red;">{-# LANGUAGE FlexibleContents, MultiParamTypeClasses, TypeFamilies #-}</p>
+					<div style="margin-top: 100px; color: lightblue; text-align: left;">
+						<p>{-# LANGUAGE FlexibleContents #-}</p>
+						<p>{-# LANGUAGE MultiParamTypeClasses #-}</p>
+						<p>{-# LANGUAGE TypFamilies #-}</p>
+					</div>
 
-					<ul>
-						<li>FlexibleContents</li>
-						<li>MultiParamTypeClasses</li>
-						<li>TypeFamilies</li>
-					</ul>
+					<aside class="notes">
+
+					</aside>
+				</section>
+
+				<section>
+					<h3>Functional Dependencies</h3>
+					<pre><code class="haskell">class Add a b c | a b -> c where
+    plus :: a -> b -> c
+
+instance Add Integer Double Double where
+    plus x y = fromIntegral x + y
+
+instance Add Double Integer Double where
+    plus x y = x + fromIntegral y
+
+instance (Num a) => Add a a a where
+    plus x y = x + y
+
+main = print $ plus (5 :: Integer) (6 :: Double)</code></pre>
+
+					<p>
+						型族と似ていて<br />
+						同じような役割を果たしている
+					</p>
 
 					<aside class="notes">
 
@@ -209,6 +233,7 @@ instance YesodAuth Auth2 where
 					<ul>
 						<li><a href="http://www.haskell.org/haskellwiki/Simonpj/Talk:FunWithTypeFuns">Fun with Type Functions</a></li>
 						<li><a href="http://www.haskell.org/haskellwiki/GHC/Type_families">Haskell Wiki on Type Families</a></li>
+						<li><a href="http://web.cecs.pdx.edu/~mpj/pubs/fundeps-esop2000.pdf">Type Classes with Functional Dependencies</a></li>
 					</ul>
 
 					<aside class="notes">
