@@ -66,8 +66,8 @@
 					<h2>intro</h2>
 					<ul>
 						<li>I am a Haskell beginner.</li>
-						<li>I've heard the term "type family", but I didn't know what it means.</li>
-						<li>I will try to give a very simple explanation to one big use for type families.</li>
+						<li>I've heard the term "type family", but I didn't know what it meant.</li>
+						<li>I will try to give a very simple explanation and motivation for type families.</li>
 						<li>You don't need to understand everything in this presentation, but hopefully next time you see type families being used, you can recall some of the ideas from here.</li>
 					</ul>
 
@@ -114,8 +114,8 @@
 				</section>
 
 				<section>
-					<h2>問題</h2>
-					<h4>どう書けばいい？</h4>
+					<h2>The Problem</h2>
+					<h4>How can we write the following code?</h4>
 					<pre class="codepre"><span data-fragment-index="2" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> <span data-fragment-index="4" class="fragment highlight-code">a</span> <span data-fragment-index="3" class="fragment highlight-code">b</span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="2" class="fragment highlight-code">plus :: a -&gt; b -&gt; <b>???</b></span>
 
@@ -125,19 +125,18 @@
 <span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span data-fragment-index="4" class="fragment highlight-code"><span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span></span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus x y = x + fromIntegral y</span></pre>
 
-					<p data-fragment-index="1" class="fragment explain-highlighted-code">さっきのとちょっと変えた。<br />Addのインスタンスに2つの型を渡している。<br />こういうインスタンスを書きたいとき、<br />型クラスのplusメンバをどういうふうに書けばいい？</p>
-					<p data-fragment-index="2" class="fragment explain-highlighted-code">plus関数の型が書けない。<br />戻り値の型がaかbか？</p>
-					<p data-fragment-index="3" class="fragment explain-highlighted-code">インスタンスがAdd Integer Doubleのとき、<br />bの型で<br />plus :: a -&gt; b -&gt; b</p>
-					<p data-fragment-index="4" class="fragment explain-highlighted-code">Add Double Integerのとき、<br />aの型です<br />plus :: a -&gt; b -&gt; a</p>
-
+					<p data-fragment-index="1" class="fragment explain-highlighted-code">This is a little different from before. <br />We are now passing two types to Add.<br />When we want to write these types of classes/instances<br />what do we write for the type of the plus function?</p>
+					<p data-fragment-index="2" class="fragment explain-highlighted-code">We can't write the type of plus.<br />Should the return type be a?  b?</p>
+					<p data-fragment-index="3" class="fragment explain-highlighted-code">For the Add Integer Double instance,<br />it should be b:<br />plus :: a -&gt; b -&gt; b</p>
+					<p data-fragment-index="4" class="fragment explain-highlighted-code">For the Add Double Integer instance,<br />it should be a:<br />plus :: a -&gt; b -&gt; a</p>
 					<aside class="notes">
 
 					</aside>
 				</section>
 
 				<section>
-					<h2>解決</h2>
-					<h4>型レベル関数？</h4>
+					<h2>The Solution</h2>
+					<h4>Type-level functions</h4>
 					<pre class="codepre"><span data-fragment-index="2" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> a b <span class="keyword">where</span></span></span>
     <span data-fragment-index="3" class="fragment highlight-code"><span data-fragment-index="2" class="fragment highlight-code"><span data-fragment-index="1" class="fragment highlight-code"><span class="typedef"><span class="keyword">type</span> <span class="type">SumTy</span> a b</span></span></span></span><span data-fragment-index="3" class="fragment show-only-blue"> = X</span>
     <span data-fragment-index="2" class="fragment highlight-code">plus :: a -&gt; b -&gt; <span data-fragment-index="1" class="fragment highlight-code"><span data-fragment-index="3" class="fragment highlight-code"><span data-fragment-index="3" class="fragment hide-code"><span class="type">SumTy</span> a b</span></span></span></span><span data-fragment-index="3" class="fragment show-only-blue">X</span>
@@ -157,21 +156,21 @@
 <span class="title">main</span> = print $ plus (<span class="number">5</span> :: <span class="type">Integer</span>) (<span class="number">6</span> :: <span class="type">Double</span>)</pre>
 
 					<ul data-fragment-index="1" class="fragment explain-highlighted-code" style="top: -40px; position: relative;">
-						<li>前のスライドと変えたところを大きく表示した</li>
-						<li>二行の追加とplusメンバの型</li>
-						<li>これが型の族 (type families)</li>
+						<li>The parts changed with the previous slide have been highlighted.</li>
+						<li>Two lines have been added and plus's type is a little different.</li>
+						<li>This is type families.</li>
 					</ul>
 					<p data-fragment-index="2" class="fragment explain-highlighted-code">
-						まず、型クラスをみてみよう。<br />
-						plusのSumTyの型ってどういう意味・・・？
+						First, lets look at the type class.<br />
+						What is the meaning of plus's SumTy?
 					</p>
 					<p data-fragment-index="3" class="fragment explain-highlighted-code">
-						こういう書き方のほうがわかりやすいでしょう。<br />
-						SumTy a b = X。plusの戻り値の型がX。<br />
-						インスタンス宣言ではXの値はDouble。
+						Writing it like this should be a little easier to understand.<br />
+						SumTy a b = X.  The return type of plus is X.<br />
+						In the instance declaration, the value of X is Double.
 					</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code">
-						こういうふうに、型族が型レベル関数と呼ばれている</p>
+						This is why they are called type-level functions.</p>
 
 					<aside class="notes">
 
@@ -179,7 +178,7 @@
 				</section>
 
 				<section>
-					<h3>型族は実際にどこで使われている？</h3>
+					<h3>Where are type families actually used?</h3>
 					<h4>Yesod!</h4>
 					<pre><code class="haskell">class YesodAuth master where
   type AuthId master
@@ -200,7 +199,7 @@ instance YesodAuth Auth2 where
 				</section>
 
 				<section>
-					<h3>必要なLANGUAGE pragmas</h3>
+					<h3>Needed LANGUAGE pragmas for using type families</h3>
 
 					<div style="margin-top: 100px; color: lightblue; text-align: left;">
 						<p>{-# LANGUAGE FlexibleContents #-}</p>
@@ -230,8 +229,8 @@ instance (Num a) => Add a a a where
 main = print $ plus (5 :: Integer) (6 :: Double)</code></pre>
 
 					<p>
-						型族と似ていて<br />
-						同じような役割を果たしている
+						Similar to type families and<br />
+						can be used in some of the same places.
 					</p>
 
 					<aside class="notes">
