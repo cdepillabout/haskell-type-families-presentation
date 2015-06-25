@@ -77,7 +77,7 @@
 				</section>
 
 				<section>
-					<h2>prerequisites</h2>
+					<h2>Prerequisites</h2>
 					<h4>type classes</h4>
 					<pre class="codepre"><span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> <span data-fragment-index="4" class="fragment highlight-code">a</span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus :: <span data-fragment-index="4" class="fragment highlight-code">a</span> -&gt; <span data-fragment-index="4" class="fragment highlight-code">a</span> -&gt; <span data-fragment-index="4" class="fragment highlight-code">a</span></span>
@@ -103,7 +103,7 @@
 					</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code">
 						The <b>a</b> from type class Add is like a variable,<br />
-						that takes a variable <b>Integer</b> from the instance declaration.<br />
+						it takes a variable <b>Integer</b> from the instance declaration.<br />
 						The Add Integer instance's plus method will have the following type:
 						plus :: <b>Integer -&gt; Integer -&gt; Integer</b>
 					</p>
@@ -125,7 +125,7 @@
 <span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span data-fragment-index="4" class="fragment highlight-code"><span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span></span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus x y = x + fromIntegral y</span></pre>
 
-					<p data-fragment-index="1" class="fragment explain-highlighted-code">This is a little different from before. <br />We are now passing two types to Add.<br />When we want to write these types of classes/instances<br />what do we write for the type of the plus function?</p>
+					<p data-fragment-index="1" class="fragment explain-highlighted-code">This is a little different from before. <br />We are now passing two types to Add.<br />When we want to write these instances of Add,<br />what should we write for the type of the plus function?</p>
 					<p data-fragment-index="2" class="fragment explain-highlighted-code">We can't write the type of plus.<br />Should the return type be a?  b?</p>
 					<p data-fragment-index="3" class="fragment explain-highlighted-code">For the Add Integer Double instance,<br />it should be b:<br />plus :: a -&gt; b -&gt; b</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code">For the Add Double Integer instance,<br />it should be a:<br />plus :: a -&gt; b -&gt; a</p>
