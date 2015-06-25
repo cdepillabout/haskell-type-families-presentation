@@ -48,10 +48,10 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>HaskellのType Families</h1>
-					<h3>型の族</h3>
-					<p>View <a href="http://cdepillabout.github.io/haskell-type-families-presentation/index.html">this presentation</a> online</p>
-					<p><a href="http://goo.gl/YXjz02">http://goo.gl/YXjz02</a></p>
+					<h1>Haskell's Type Families</h1>
+					<!-- <p>View <a href="http://cdepillabout.github.io/haskell-type-families-presentation/index.html">this presentation</a> online</p> -->
+					<!-- <p><a href="http://goo.gl/YXjz02">http://goo.gl/YXjz02</a></p> -->
+					<p><a href="http://cdepillabout.github.io/haskell-type-families-presentation/index-ja.html">日本語</a></p>
 					<p><a href="https://github.com/cdepillabout/haskell-type-families-presentation">Github repository</a></p>
 					<p style="margin-top: 50px">
 						<small>Created by <a href="https://github.com/cdepillabout">Dennis</a> / <a href="http://twitter.com/cdepillabout">@cdepillabout</a></small>
@@ -65,10 +65,10 @@
 				<section>
 					<h2>intro</h2>
 					<ul>
-						<li>Haskellの初心者</li>
-						<li>type familiesって聞いたことあるけど何なのか分からなかった</li>
-						<li>このLTを機会に、型の族を調べて簡単に説明したい</li>
-						<li>Haskellのコードで型族を見る機会があった際に、<b>「あ！これはあのプレゼンテーションで聞いたぞ！」</b>と思っていただけるような内容にしたい</li>
+						<li>I am a Haskell beginner.</li>
+						<li>I've heard the term "type family", but I didn't know what it means.</li>
+						<li>I will try to give a very simple explanation to one big use for type families.</li>
+						<li>You don't need to understand everything in this presentation, but hopefully next time you see type families being used, you can recall some of the ideas from here.</li>
 					</ul>
 
 					<aside class="notes">
@@ -77,8 +77,8 @@
 				</section>
 
 				<section>
-					<h2>予備知識</h2>
-					<h4>型クラス（type classes）</h4>
+					<h2>prerequisites</h2>
+					<h4>type classes</h4>
 					<pre class="codepre"><span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">class</span> <span class="type">Add</span> <span data-fragment-index="4" class="fragment highlight-code">a</span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus :: <span data-fragment-index="4" class="fragment highlight-code">a</span> -&gt; <span data-fragment-index="4" class="fragment highlight-code">a</span> -&gt; <span data-fragment-index="4" class="fragment highlight-code">a</span></span>
 
@@ -89,22 +89,22 @@
     plus x y = x + y
 
 <span class="title">main</span> = <span class="keyword">do</span>
-        <span data-fragment-index="3" class="fragment highlight-code">print $ plus (<span class="number">5</span> :: <span class="type">Integer</span>) <span class="number">6</span></span>    <span class="comment">-- 11が出力される</span>
-        print $ plus (<span class="number">5.0</span> :: <span class="type">Double</span>) <span class="number">6.0</span> <span class="comment">-- 11.0が出力される</span></pre>
+        <span data-fragment-index="3" class="fragment highlight-code">print $ plus (<span class="number">5</span> :: <span class="type">Integer</span>) <span class="number">6</span></span>    <span class="comment">-- 11 is printed</span>
+        print $ plus (<span class="number">5.0</span> :: <span class="type">Double</span>) <span class="number">6.0</span> <span class="comment">-- 11.0 is printed</span></pre>
 
 					<p data-fragment-index="1" class="fragment explain-highlighted-code">
-						型クラスAdd aの宣言
+						definition of typeclass Add a
 					</p>
 					<p data-fragment-index="2" class="fragment explain-highlighted-code">
-						インスタンス宣言
+						instance declaration
 					</p>
 					<p data-fragment-index="3" class="fragment explain-highlighted-code">
-						使い方
+						how to use
 					</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code">
-						型クラスAddの<b>a</b>が変数みたいなもので、<br />
-						インスタンス宣言で<b>Integer</b>という値が入る。<br />
-						Add Integerのインスタンスのプラス関数が下記の型になる<br />
+						The <b>a</b> from type class Add is like a variable,<br />
+						that takes a variable <b>Integer</b> from the instance declaration.<br />
+						The Add Integer instance's plus method will have the following type:
 						plus :: <b>Integer -&gt; Integer -&gt; Integer</b>
 					</p>
 
