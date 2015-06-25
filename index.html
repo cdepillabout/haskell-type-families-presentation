@@ -6,7 +6,7 @@
 
 		<title>Haskell Type Families</title>
 
-		<meta name="description" content="a presentation about haskell's type families">
+		<meta name="description" content="a presentation about Haskell's type families">
 		<meta name="author" content="Dennis">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,10 +65,10 @@
 				<section>
 					<h2>intro</h2>
 					<ul>
-						<li>haskellの初心者</li>
+						<li>Haskellの初心者</li>
 						<li>type familiesって聞いたことあるけど何なのか分からなかった</li>
 						<li>このLTを機会に、型の族を調べて簡単に説明したい</li>
-						<li>haskellのコードで型族を見る機会があった際に、<b>「あ！これはあのプレゼンテーションで聞いたぞ！」</b>と思っていただけるような内容にしたい</li>
+						<li>Haskellのコードで型族を見る機会があった際に、<b>「あ！これはあのプレゼンテーションで聞いたぞ！」</b>と思っていただけるような内容にしたい</li>
 					</ul>
 
 					<aside class="notes">
@@ -125,7 +125,7 @@
 <span data-fragment-index="1" class="fragment highlight-code"><span class="class"><span class="keyword">instance</span> <span data-fragment-index="4" class="fragment highlight-code"><span class="type">Add</span> <span class="type">Double</span> <span class="type">Integer</span></span> <span class="keyword">where</span></span></span>
     <span data-fragment-index="1" class="fragment highlight-code">plus x y = x + fromIntegral y</span></pre>
 
-					<p data-fragment-index="1" class="fragment explain-highlighted-code">先のとちょっと変えた。<br />Addのインスタンスに二つの型を渡している。<br />こういうインスタンスを書きたいとき、<br />型クラスのplusメンバをどういうふうに書けばいい？</p>
+					<p data-fragment-index="1" class="fragment explain-highlighted-code">さっきのとちょっと変えた。<br />Addのインスタンスに2つの型を渡している。<br />こういうインスタンスを書きたいとき、<br />型クラスのplusメンバをどういうふうに書けばいい？</p>
 					<p data-fragment-index="2" class="fragment explain-highlighted-code">plus関数の型が書けない。<br />戻り値の型がaかbか？</p>
 					<p data-fragment-index="3" class="fragment explain-highlighted-code">インスタンスがAdd Integer Doubleのとき、<br />bの型で<br />plus :: a -&gt; b -&gt; b</p>
 					<p data-fragment-index="4" class="fragment explain-highlighted-code">Add Double Integerのとき、<br />aの型です<br />plus :: a -&gt; b -&gt; a</p>
@@ -163,7 +163,7 @@
 					</ul>
 					<p data-fragment-index="2" class="fragment explain-highlighted-code">
 						まず、型クラスをみてみよう。<br />
-						plusのSumTyの型ってどういう意味、、、？
+						plusのSumTyの型ってどういう意味・・・？
 					</p>
 					<p data-fragment-index="3" class="fragment explain-highlighted-code">
 						こういう書き方のほうがわかりやすいでしょう。<br />
